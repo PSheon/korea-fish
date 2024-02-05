@@ -1,17 +1,18 @@
 // ** React Imports
-import { Ref, forwardRef, useEffect, ReactElement } from 'react'
+import { Ref, forwardRef, ReactElement } from 'react'
 
 // ** Redux Imports
 import { useDispatch, useSelector } from 'react-redux'
 
 // ** Next Import
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // ** MUI Imports
+
+// import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Dialog from '@mui/material/Dialog'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Fade, { FadeProps } from '@mui/material/Fade'
 import DialogContent from '@mui/material/DialogContent'
@@ -42,9 +43,10 @@ const MintHintDialog = () => {
   const handleCloseDialog = () => {
     dispatch(hideMintHintDialog())
   }
-  const handleReloadPage = () => {
-    window.location.reload()
-  }
+
+  // const handleReloadPage = () => {
+  //   window.location.reload()
+  // }
 
   return (
     <Dialog

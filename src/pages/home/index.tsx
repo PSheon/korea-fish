@@ -36,9 +36,14 @@ const StyledRootBox = styled(Box)<BoxProps>(({ theme }) => ({
 
 const HomePage = () => {
   // ** Hooks
-  const { data: Project, isError: isFindMeUserEntityError, isLoading: isFindMeUserEntityLoading } = useFindOneQuery({})
+  const {
+    data: Project,
 
-  if (isFindMeUserEntityLoading) {
+    /* isError: isFindProjectEntityError, */
+    isLoading: isFindProjectEntityLoading
+  } = useFindOneQuery({})
+
+  if (isFindProjectEntityLoading) {
     return (
       <StyledRootBox>
         <Box sx={{ py: 4 }}>

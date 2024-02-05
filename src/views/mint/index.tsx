@@ -17,9 +17,10 @@ const MintButtons = () => {
   // ** Hooks
   const auth = useAuth()
   const {
-    data: Project,
-    isError: isFindProjectEntityError,
-    isLoading: isFindProjectEntityLoading
+    data: Project
+
+    /* isError: isFindProjectEntityError, */
+    /* isLoading: isFindProjectEntityLoading */
   } = useFindOneQuery({})
 
   if (auth.user.role === 'Public') {

@@ -1,6 +1,3 @@
-// ** React Imports
-import { forwardRef, useImperativeHandle, useRef } from 'react'
-
 // ** MUI Components
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -38,8 +35,9 @@ const MintProgress = (props: Props) => {
   const {
     data: totalLikeData = 0,
     isLoading: isTotalLikeLoading,
-    isRefetching: isTotalLikeRefetching,
-    refetch: refetchTotalLike
+    isRefetching: isTotalLikeRefetching
+
+    // refetch: refetchTotalLike
   } = useContractRead({
     address: initProjectEntity.contractAddress as Address,
     abi: initProjectEntity.contractABI as unknown as Abi,
@@ -48,8 +46,9 @@ const MintProgress = (props: Props) => {
   const {
     data: totalDislikeData = 0,
     isLoading: isTotalDislikeLoading,
-    isRefetching: isTotalDislikeRefetching,
-    refetch: refetchTotalDislike
+    isRefetching: isTotalDislikeRefetching
+
+    // refetch: refetchTotalDislike
   } = useContractRead({
     address: initProjectEntity.contractAddress as Address,
     abi: initProjectEntity.contractABI as unknown as Abi,
@@ -57,10 +56,10 @@ const MintProgress = (props: Props) => {
   })
 
   // ** Logics
-  const reloadProgress = () => {
-    refetchTotalLike()
-    refetchTotalDislike()
-  }
+  // const reloadProgress = () => {
+  //   refetchTotalLike()
+  //   refetchTotalDislike()
+  // }
 
   return (
     <Stack

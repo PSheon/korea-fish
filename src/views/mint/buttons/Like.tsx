@@ -29,12 +29,13 @@ const LikeDialog = (props: Props) => {
 
   // ** Hooks
   const dispatch = useDispatch<AppDispatch>()
-  const { config: mintConfig, error: mintConfigError } = usePrepareContractWrite({
+  const { config: mintConfig /* error: mintConfigError */ } = usePrepareContractWrite({
     address: initProjectEntity.contractAddress as Address,
     abi: initProjectEntity.contractABI as unknown as Abi,
     functionName: 'like',
     args: [100],
     value: parseEther((0.0001 * 100).toString())
+
     // enabled: Boolean(signature?.hash)
   })
   const {

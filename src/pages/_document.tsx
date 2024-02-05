@@ -20,7 +20,7 @@ class CustomDocument extends Document {
           <meta name='description' content='Do you like  Korea Fish' />
           <meta name='keywords' content='nft,eth,korea,fish,meme' />
           <meta name='robots' content='index, follow' />
-          <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+          <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
           <meta name='language' content='English' />
           <meta name='msapplication-TileColor' content='#da532c' />
           <meta name='theme-color' content='#ffffff' />

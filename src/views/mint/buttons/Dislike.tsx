@@ -28,12 +28,13 @@ const DislikeDialog = (props: Props) => {
 
   // ** Hooks
   const dispatch = useDispatch<AppDispatch>()
-  const { config: burnConfig, error: burnConfigError } = usePrepareContractWrite({
+  const { config: burnConfig /* error: burnConfigError */ } = usePrepareContractWrite({
     address: initProjectEntity.contractAddress as Address,
     abi: initProjectEntity.contractABI as unknown as Abi,
     functionName: 'dislike',
     args: [100],
     value: parseEther((0.0001 * 100).toString())
+
     // enabled: Boolean(signature?.hash)
   })
   const {

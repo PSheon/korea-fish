@@ -30,7 +30,6 @@ import { useAuth } from 'src/hooks/useAuth'
 import { formatAddress } from 'src/utils'
 
 // ** Type Imports
-import { Settings } from 'src/@core/context/settingsContext'
 import { UserDataType } from 'src/context/types'
 
 // ** Styled Components
