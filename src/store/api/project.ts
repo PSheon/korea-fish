@@ -14,7 +14,7 @@ import {
 const PROJECT_API_REDUCER_KEY = 'projectApi'
 export const projectApi = createApi({
   reducerPath: PROJECT_API_REDUCER_KEY,
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_ENDPOINT as string }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_URL as string }),
   endpoints: builder => ({
     findOne: builder.query<FindOneProjectResponseType, FindOneProjectParamsType>({
       query: params => ({
