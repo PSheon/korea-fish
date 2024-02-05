@@ -5,8 +5,9 @@ import { Fragment, Ref, useState, forwardRef, ReactElement } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // ** MUI Imports
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { Theme } from '@mui/material/styles'
+// import useMediaQuery from '@mui/material/useMediaQuery'
+// import { Theme } from '@mui/material/styles'
+
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Alert from '@mui/material/Alert'
@@ -63,7 +64,8 @@ const ConnectWalletButton = () => {
   const dispatch = useDispatch<AppDispatch>()
   const store = useSelector((state: RootState) => state.dialog.walletConnector)
   const bgColors = useBgColor()
-  const isDesktop = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'))
+
+  // const isDesktop = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'))
   const { connectAsync, connectors, error: connectError, isLoading, pendingConnector } = useConnect()
   const { disconnect } = useDisconnect()
   const { signMessageAsync } = useSignMessage()
