@@ -64,7 +64,7 @@ const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
-      axios.defaults.baseURL = (process.env.NEXT_PUBLIC_BACKEND_URL as string) || 'http://localhost:1337'
+      axios.defaults.baseURL = (process.env.NEXT_PUBLIC_API_URL as string) || 'http://localhost:1337'
 
       const storedToken = window.localStorage.getItem(authConfig.storageTokenKeyName)!
       if (storedToken) {
