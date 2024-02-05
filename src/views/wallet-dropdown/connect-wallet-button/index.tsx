@@ -123,7 +123,11 @@ const ConnectWalletButton = () => {
 
   return (
     <Fragment>
-      {isDesktop ? (
+      <Button onClick={handleOpen} variant='contained' size='small'>
+        Connect
+      </Button>
+
+      {/* {isDesktop ? (
         <Button onClick={handleOpen} variant='contained' size='small'>
           Connect
         </Button>
@@ -131,7 +135,7 @@ const ConnectWalletButton = () => {
         <IconButton onClick={handleOpen} size='small'>
           <Icon icon='material-symbols:account-balance-wallet-outline' />
         </IconButton>
-      )}
+      )} */}
 
       <Dialog
         fullWidth
