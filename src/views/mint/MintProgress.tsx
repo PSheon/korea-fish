@@ -1,3 +1,6 @@
+// ** React Imports
+import { useEffect } from 'react'
+
 // ** MUI Components
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -7,6 +10,7 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 
 // ** Utils Imports
 import { useContractRead } from 'wagmi'
+import { subscribe, unsubscribe } from 'src/utils/events'
 
 // ** Type Imports
 import { Address, Abi } from 'viem'
@@ -35,9 +39,8 @@ const MintProgress = (props: Props) => {
   const {
     data: totalLikeData = 0,
     isLoading: isTotalLikeLoading,
-    isRefetching: isTotalLikeRefetching
-
-    // refetch: refetchTotalLike
+    isRefetching: isTotalLikeRefetching,
+    refetch: refetchTotalLike
   } = useContractRead({
     address: initProjectEntity.contractAddress as Address,
     abi: initProjectEntity.contractABI as unknown as Abi,
@@ -46,9 +49,8 @@ const MintProgress = (props: Props) => {
   const {
     data: totalDislikeData = 0,
     isLoading: isTotalDislikeLoading,
-    isRefetching: isTotalDislikeRefetching
-
-    // refetch: refetchTotalDislike
+    isRefetching: isTotalDislikeRefetching,
+    refetch: refetchTotalDislike
   } = useContractRead({
     address: initProjectEntity.contractAddress as Address,
     abi: initProjectEntity.contractABI as unknown as Abi,
@@ -56,10 +58,19 @@ const MintProgress = (props: Props) => {
   })
 
   // ** Logics
-  // const reloadProgress = () => {
-  //   refetchTotalLike()
-  //   refetchTotalDislike()
-  // }
+  const reloadProgress = () => {
+    refetchTotalLike()
+    refetchTotalDislike()
+  }
+
+  // ** Side Effects
+  useEffect(() => {
+    subscribe('reload-progress', () => reloadProgress())
+
+    return () => {
+      unsubscribe('reload-progress', () => reloadProgress())
+    }
+  }, [])
 
   return (
     <Stack

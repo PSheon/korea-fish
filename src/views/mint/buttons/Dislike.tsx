@@ -10,6 +10,7 @@ import LoadingButton from '@mui/lab/LoadingButton'
 // ** Utils Imports
 import { Address, parseEther, Abi } from 'viem'
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
+import { publish } from 'src/utils/events'
 
 // ** Actions
 import { setMintProcessLoading } from 'src/store/mint/uiSlice'
@@ -67,6 +68,7 @@ const DislikeDialog = (props: Props) => {
           hash: data?.blockHash
         })
       )
+      publish('reload-progress', {})
     },
     onError() {
       dispatch(setMintProcessLoading(false))
