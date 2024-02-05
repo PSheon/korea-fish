@@ -1,38 +1,86 @@
-// ** MUI Imports
-import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import CardHeader from '@mui/material/CardHeader'
-import CardContent from '@mui/material/CardContent'
+// ** React Imports
+import { ReactNode } from 'react'
 
-const Home = () => {
-  return (
-    <Grid container spacing={6}>
-      <Grid item xs={12}>
-        <Card>
-          <CardHeader title='Kick start your project 🚀'></CardHeader>
-          <CardContent>
-            <Typography sx={{ mb: 2 }}>All the best for your new project.</Typography>
-            <Typography>
-              Please make sure to read our Template Documentation to understand where to go from here and how to use our
-              template.
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={12}>
-        <Card>
-          <CardHeader title='ACL and JWT 🔒'></CardHeader>
-          <CardContent>
-            <Typography sx={{ mb: 2 }}>
-              Access Control (ACL) and Authentication (JWT) are the two main security features of our template and are implemented in the starter-kit as well.
-            </Typography>
-            <Typography>Please read our Authentication and ACL Documentations to get more out of them.</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    </Grid>
-  )
+// ** Next Imports
+import Image from 'next/image'
+
+// ** MUI Components
+import { styled } from '@mui/material/styles'
+import Box, { BoxProps } from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+
+// ** Api Imports
+import { useFindOneQuery } from 'src/store/api/project'
+
+// ** Layout Import
+import BlankLayout from 'src/@core/layouts/BlankLayout'
+
+// ** Component Imports
+import WalletDropdown from 'src/views/wallet-dropdown'
+import MintProgress from 'src/views/mint/MintProgress'
+import MintSection from 'src/views/mint'
+import SwitchNetworkModal from 'src/views/shared/SwitchNetworkModal'
+
+// ** Styled Components
+const StyledRootBox = styled(Box)<BoxProps>(({ theme }) => ({
+  width: '100%',
+  height: '100vh',
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: theme.spacing(8),
+  background: '#90dbf8'
+}))
+
+const HomePage = () => {
+  // ** Hooks
+  const { data: Project, isError: isFindMeUserEntityError, isLoading: isFindMeUserEntityLoading } = useFindOneQuery({})
+
+  if (isFindMeUserEntityLoading) {
+    return (
+      <StyledRootBox>
+        <Box sx={{ py: 4 }}>
+          <Image src='/images/master-fish.gif' alt='maser fish' width={360} height={360} />
+        </Box>
+      </StyledRootBox>
+    )
+  } else {
+    return (
+      <StyledRootBox>
+        <Box sx={{ position: 'absolute', top: 0, right: 0, p: 4 }}>
+          <WalletDropdown />
+        </Box>
+
+        <Typography variant='h2'>Korea Fish</Typography>
+        <Box sx={{ mt: 4 }}>
+          <Typography variant='h5'>Like me or Hate me</Typography>
+        </Box>
+
+        <Box sx={{ py: 4 }}>
+          <Image src='/images/master-fish.gif' alt='maser fish' width={360} height={360} />
+        </Box>
+
+        <Box sx={{ width: '80%', pb: 6 }}>
+          <MintProgress initProjectEntity={Project!} />
+        </Box>
+
+        <Box sx={{ py: 4 }}>
+          <MintSection />
+        </Box>
+
+        <SwitchNetworkModal initProjectEntity={Project!} />
+      </StyledRootBox>
+    )
+  }
 }
 
-export default Home
+HomePage.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
+HomePage.contentHeightFixed = true
+HomePage.acl = {
+  action: 'read',
+  subject: 'public-page'
+}
+
+export default HomePage

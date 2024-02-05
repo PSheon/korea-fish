@@ -15,14 +15,26 @@ class CustomDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
+          {/* Meta */}
+          <meta name='title' content='Korea Fish' />
+          <meta name='description' content='Do you like  Korea Fish' />
+          <meta name='keywords' content='nft,eth,korea,fish,meme' />
+          <meta name='robots' content='index, follow' />
+          <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+          <meta name='language' content='English' />
+          <meta name='msapplication-TileColor' content='#da532c' />
+          <meta name='theme-color' content='#ffffff' />
+
+          {/* Link */}
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
-          <link
-            rel='stylesheet'
-            href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
-          />
-          <link rel='apple-touch-icon' sizes='180x180' href='/images/apple-touch-icon.png' />
-          <link rel='shortcut icon' href='/images/favicon.png' />
+          <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap' />
+          <link rel='apple-touch-icon' sizes='180x180' href='/seo/apple-touch-icon.png' />
+          <link rel='shortcut icon' href='/favicon.png' />
+          <link rel='icon' type='image/png' sizes='32x32' href='/seo/favicon-32x32.png' />
+          <link rel='icon' type='image/png' sizes='16x16' href='/seo/favicon-16x16.png' />
+          <link rel='manifest' href='/site.webmanifest' />
+          <link rel='mask-icon' href='/seo/safari-pinned-tab.svg' color='#5bbad5' />
         </Head>
         <body>
           <Main />

@@ -1,3 +1,6 @@
+// ** React Imports
+import { forwardRef, useImperativeHandle, useRef } from 'react'
+
 // ** MUI Components
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -14,7 +17,6 @@ import { ProjectType } from 'src/types/api/projectTypes'
 
 interface Props {
   initProjectEntity: ProjectType
-  reloadProgress: () => void
 }
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -30,7 +32,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const MintProgress = (props: Props) => {
   // ** props
-  const { initProjectEntity, reloadProgress } = props
+  const { initProjectEntity } = props
 
   // ** Hooks
   const {
@@ -55,7 +57,7 @@ const MintProgress = (props: Props) => {
   })
 
   // ** Logics
-  const reload = () => {
+  const reloadProgress = () => {
     refetchTotalLike()
     refetchTotalDislike()
   }

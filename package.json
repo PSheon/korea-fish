@@ -37,6 +37,7 @@
     "apexcharts-clevision": "3.28.5",
     "axios": "1.3.4",
     "axios-mock-adapter": "1.21.2",
+    "blockies-react-svg": "^0.0.13",
     "bootstrap-icons": "1.10.3",
     "chart.js": "4.2.1",
     "cleave.js": "1.6.0",
@@ -53,6 +54,7 @@
     "nprogress": "0.2.0",
     "payment": "2.4.6",
     "prismjs": "1.29.0",
+    "qs": "^6.11.2",
     "react": "18.2.0",
     "react-apexcharts": "1.4.0",
     "react-chartjs-2": "5.2.0",
@@ -70,6 +72,8 @@
     "recharts": "2.4.3",
     "stylis": "4.1.3",
     "stylis-plugin-rtl": "2.1.1",
+    "viem": "^1.4.1",
+    "wagmi": "^1.4.13",
     "yup": "1.0.2"
   },
   "devDependencies": {
@@ -85,6 +89,7 @@
     "@types/nprogress": "0.2.0",
     "@types/payment": "2.1.4",
     "@types/prismjs": "1.26.0",
+    "@types/qs": "^6.9.11",
     "@types/react": "18.0.28",
     "@types/react-credit-cards": "0.8.1",
     "@types/react-datepicker": "4.10.0",

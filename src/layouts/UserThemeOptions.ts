@@ -21,6 +21,10 @@ const UserThemeOptions = (): ThemeOptions => {
   // const palette = corePalette(mode as PaletteMode, skin)
 
   return {
+    typography: {
+      fontFamily: '"Pixelify Sans", sans-serif'
+    }
+
     /*
     palette:{
       primary: {

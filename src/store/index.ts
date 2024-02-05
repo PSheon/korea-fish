@@ -2,16 +2,22 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 // ** Reducers
+import dialog from 'src/store/dialog'
 import mint from 'src/store/mint'
+
+// ** Api
+import { projectApi } from 'src/store/api/project'
 
 export const store = configureStore({
   reducer: {
-    mint
+    dialog,
+    mint,
+    [projectApi.reducerPath]: projectApi.reducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false
-    }).concat([])
+    }).concat([projectApi.middleware])
 })
 
 export type AppDispatch = typeof store.dispatch

@@ -7,9 +7,9 @@ import { Router } from 'next/router'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
-
-
-
+// ** Store Imports
+import { store } from 'src/store'
+import { Provider } from 'react-redux'
 
 // ** Loader Import
 import NProgress from 'nprogress'
@@ -24,7 +24,16 @@ import { defaultACLObj } from 'src/configs/acl'
 import themeConfig from 'src/configs/themeConfig'
 
 // ** Fake-DB Import
-import 'src/@fake-db'
+// import 'src/@fake-db'
+
+// ** Wagmi Imports
+import { WagmiConfig, createConfig, configureChains } from 'wagmi'
+import { mainnet, polygon, avalanche, bsc, goerli, arbitrumGoerli, sepolia } from 'wagmi/chains'
+import { infuraProvider } from 'wagmi/providers/infura'
+import { publicProvider } from 'wagmi/providers/public'
+import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast'
@@ -49,12 +58,6 @@ import ReactHotToast from 'src/@core/styles/libs/react-hot-toast'
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
 
-// ** Prismjs Styles
-import 'prismjs'
-import 'prismjs/themes/prism-tomorrow.css'
-import 'prismjs/components/prism-jsx'
-import 'prismjs/components/prism-tsx'
-
 // ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
@@ -76,6 +79,34 @@ type GuardProps = {
 }
 
 const clientSideEmotionCache = createEmotionCache()
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [mainnet, polygon, avalanche, bsc, goerli, arbitrumGoerli, sepolia],
+  [infuraProvider({ apiKey: process.env.NEXT_PUBLIC_INFURA_API_KEY as string }), publicProvider()]
+)
+
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new WalletConnectConnector({
+      chains,
+      options: {
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
+        qrModalOptions: {
+          themeMode: 'dark'
+        }
+      }
+    }),
+    new CoinbaseWalletConnector({
+      chains,
+      options: {
+        appName: 'Korea Fish'
+      }
+    })
+  ],
+  publicClient,
+  webSocketPublicClient
+})
 
 // ** Pace Loader
 if (themeConfig.routingLoader) {
@@ -118,40 +149,42 @@ const App = (props: ExtendedAppProps) => {
   const aclAbilities = Component.acl ?? defaultACLObj
 
   return (
-    
-      <CacheProvider value={emotionCache}>
-        <Head>
-          <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
-          <meta
-            name='description'
-            content={`${themeConfig.templateName} – Material Design React Admin Dashboard Template – is the most developer friendly & highly customizable Admin Dashboard Template based on MUI v5.`}
-          />
-          <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
-          <meta name='viewport' content='initial-scale=1, width=device-width' />
-        </Head>
+    <WagmiConfig config={wagmiConfig}>
+      <Provider store={store}>
+        <CacheProvider value={emotionCache}>
+          <Head>
+            <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
+            <meta
+              name='description'
+              content={`${themeConfig.templateName} – Material Design React Admin Dashboard Template – is the most developer friendly & highly customizable Admin Dashboard Template based on MUI v5.`}
+            />
+            <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
+            <meta name='viewport' content='initial-scale=1, width=device-width' />
+          </Head>
 
-        <AuthProvider>
-          <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
-            <SettingsConsumer>
-              {({ settings }) => {
-                return (
-                  <ThemeComponent settings={settings}>
-                    <Guard authGuard={authGuard} guestGuard={guestGuard}>
-                      <AclGuard aclAbilities={aclAbilities} guestGuard={guestGuard} authGuard={authGuard}>
-                        {getLayout(<Component {...pageProps} />)}
-                      </AclGuard>
-                    </Guard>
-                    <ReactHotToast>
-                      <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
-                    </ReactHotToast>
-                  </ThemeComponent>
-                )
-              }}
-            </SettingsConsumer>
-          </SettingsProvider>
-        </AuthProvider>
-      </CacheProvider>
-   
+          <AuthProvider>
+            <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+              <SettingsConsumer>
+                {({ settings }) => {
+                  return (
+                    <ThemeComponent settings={settings}>
+                      <Guard authGuard={authGuard} guestGuard={guestGuard}>
+                        <AclGuard aclAbilities={aclAbilities} guestGuard={guestGuard} authGuard={authGuard}>
+                          {getLayout(<Component {...pageProps} />)}
+                        </AclGuard>
+                      </Guard>
+                      <ReactHotToast>
+                        <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
+                      </ReactHotToast>
+                    </ThemeComponent>
+                  )
+                }}
+              </SettingsConsumer>
+            </SettingsProvider>
+          </AuthProvider>
+        </CacheProvider>
+      </Provider>
+    </WagmiConfig>
   )
 }
 

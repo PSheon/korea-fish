@@ -5,7 +5,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IInitialState } from 'src/types/mint/uiTypes'
 
 const initialState: IInitialState = {
-  mintProcessLoading: false
+  mintProcessLoading: false,
+  likeDialogShow: false,
+  dislikeDialogShow: false
 }
 
 const uiSlice = createSlice({
@@ -14,11 +16,24 @@ const uiSlice = createSlice({
   reducers: {
     setMintProcessLoading: (state, action: PayloadAction<boolean>) => {
       state.mintProcessLoading = action.payload
+    },
+    showLikeDialog: state => {
+      state.likeDialogShow = true
+    },
+    hideLikeDialog: state => {
+      state.likeDialogShow = true
+    },
+    showDislikeDialog: state => {
+      state.dislikeDialogShow = true
+    },
+    hideDislikeDialog: state => {
+      state.dislikeDialogShow = true
     }
   },
   extraReducers: {}
 })
 
-export const { setMintProcessLoading } = uiSlice.actions
+export const { setMintProcessLoading, showLikeDialog, hideLikeDialog, showDislikeDialog, hideDislikeDialog } =
+  uiSlice.actions
 
 export default uiSlice.reducer

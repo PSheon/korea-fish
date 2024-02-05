@@ -1,26 +1,66 @@
 export type ErrCallbackType = (err: { [key: string]: string }) => void
 
-export type LoginParams = {
-  email: string
-  password: string
-  rememberMe?: boolean
+// ** Request Message
+export type RequestMessageParamsType = {
+  address: string
+  chain: '0x1' | '0x5'
+  networkType: 'evm'
+}
+export type RequestMessageResponseType = {
+  message: string
+}
+
+// ** Connect Wallet
+export type ConnectWalletParamsType = {
+  message: string
+  signature: string
+}
+export type ConnectWalletResponseType = {
+  accessToken: string
+  userData: GetMeUserDataResponseType
+}
+
+export type GetMeUserDataResponseType = {
+  id: number
+  provider: string
+  address: string
+  email?: string
+  username: string
+  blocked: boolean
+  confirmed: boolean
+  isHighlighted: boolean
+  createdAt: string
+  updatedAt: string
+  role: {
+    id: number
+    name: string
+    description: string
+    type: string
+    createdAt: string
+    updatedAt: string
+  }
 }
 
 export type UserDataType = {
   id: number
-  role: string
-  email: string
-  fullName: string
+  provider: string
+  address: string
+  email?: string
   username: string
-  password: string
-  avatar?: string | null
+  blocked: boolean
+  confirmed: boolean
+  isHighlighted: boolean
+  createdAt: string
+  updatedAt: string
+  role: string
 }
 
 export type AuthValuesType = {
   loading: boolean
-  logout: () => void
-  user: UserDataType | null
+  user: UserDataType
   setLoading: (value: boolean) => void
-  setUser: (value: UserDataType | null) => void
-  login: (params: LoginParams, errorCallback?: ErrCallbackType) => void
+  setUser: (value: UserDataType) => void
+  requestMessage: (params: RequestMessageParamsType) => Promise<string>
+  connectWallet: (params: ConnectWalletParamsType, errorCallback?: ErrCallbackType) => Promise<void>
+  disconnectWallet: () => void
 }

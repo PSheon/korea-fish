@@ -1,4 +1,8 @@
+// ** Casl Imports
 import { AbilityBuilder, Ability } from '@casl/ability'
+
+// ** Types Imports
+import { ThemeColor } from 'src/@core/layouts/types'
 
 export type Subjects = string
 export type Actions = 'manage' | 'create' | 'read' | 'update' | 'delete'
@@ -11,6 +15,14 @@ export type ACLObj = {
   subject: string
 }
 
+interface UserRoleAttributeType {
+  [key: string]: { icon: string; color: ThemeColor }
+}
+export const userRoleAttributes: UserRoleAttributeType = {
+  Authenticated: { icon: 'mdi:laptop', color: 'primary' },
+  Public: { icon: 'mdi:user-outline', color: 'warning' }
+}
+
 /**
  * Please define your own Ability rules according to your app requirements.
  * We have just shown Admin and Client rules for demo purpose where
@@ -19,10 +31,10 @@ export type ACLObj = {
 const defineRulesFor = (role: string, subject: string) => {
   const { can, rules } = new AbilityBuilder(AppAbility)
 
-  if (role === 'admin') {
+  if (role === 'Authenticated') {
     can('manage', 'all')
-  } else if (role === 'client') {
-    can(['read'], 'acl-page')
+  } else if (role === 'Public') {
+    can(['read'], 'public-page')
   } else {
     can(['read', 'create', 'update', 'delete'], subject)
   }
