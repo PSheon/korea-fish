@@ -17,13 +17,22 @@ class CustomDocument extends Document {
         <Head>
           {/* Meta */}
           <meta name='title' content='Korea Fish' />
-          <meta name='description' content='Do you like  Korea Fish' />
-          <meta name='keywords' content='nft,eth,korea,fish,meme' />
+          <meta name='description' content='Do you like Korea Fish' />
+          <meta name='keywords' content='nft,eth,korea,fish,meme,coinbase,wallet,' />
           <meta name='robots' content='index, follow' />
           <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
           <meta name='language' content='English' />
           <meta name='msapplication-TileColor' content='#da532c' />
           <meta name='theme-color' content='#ffffff' />
+          <meta property='og:title' content='Korea Fish' />
+          <meta property='og:type' content='website' />
+          <meta property='og:description' content='Do you like Korea Fish' />
+          <meta property='og:image' content='https://www.koreafish.xyz/fish.png' />
+          <meta property='og:url' content='https://www.koreafish.xyz'></meta>
+          <meta name='twitter:title' content='Korea Fish' />
+          <meta name='twitter:description' content='Do you like Korea Fish' />
+          <meta name='twitter:url' content='https://www.koreafish.xyz/fish.png' />
+          <meta name='twitter:card' content='summary' />
 
           {/* Link */}
           <link rel='preconnect' href='https://fonts.googleapis.com' />
