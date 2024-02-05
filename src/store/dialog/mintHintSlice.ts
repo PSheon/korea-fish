@@ -6,7 +6,7 @@ import { IInitialState, IShowMintHintDialogPayload } from 'src/types/dialog/mint
 
 const initialState: IInitialState = {
   show: false,
-  type: 'success',
+  type: 'init',
   title: 'Minted Successfully',
   description: 'Congratulations! You have Minted successfully.',
   hash: 'hash'
@@ -25,7 +25,7 @@ const mintHintSlice = createSlice({
     },
     hideMintHintDialog: state => {
       state.show = false
-      state.type = 'success'
+      state.type = 'init'
       state.title = ''
       state.description = ''
       state.hash = ''

@@ -21,6 +21,9 @@ import IconButton from '@mui/material/IconButton'
 // ** Actions
 import { hideMintHintDialog } from 'src/store/dialog/mintHintSlice'
 
+// ** Util Imports
+import ConfettiExplosion from 'react-confetti-explosion'
+
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 
@@ -65,6 +68,7 @@ const MintHintDialog = () => {
         }
       }}
     >
+      {mintHintStore.type === 'success' && <ConfettiExplosion />}
       <DialogContent sx={{ px: { xs: 8, sm: 15 }, py: { xs: 8, sm: 12.5 }, position: 'relative' }}>
         <IconButton size='small' onClick={handleCloseDialog} sx={{ position: 'absolute', right: '1rem', top: '1rem' }}>
           <Icon icon='mdi:close' />

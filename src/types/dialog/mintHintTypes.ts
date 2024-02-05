@@ -1,13 +1,13 @@
 export interface IInitialState {
   show: boolean
-  type: 'error' | 'success'
+  type: 'init' | 'error' | 'success'
   title: string
   description: string
   hash: string
 }
 
 export interface IShowMintHintDialogPayload {
-  type: 'error' | 'success'
+  type: 'init' | 'error' | 'success'
   title?: string
   description?: string
   hash?: string
