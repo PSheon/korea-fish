@@ -70,7 +70,7 @@ const SwitchNetworkModal = (props: Props) => {
               <Typography variant='h6' sx={{ mb: 3, fontWeight: '700' }}>
                 Switch Network
               </Typography>
-              <Typography variant='body1'>{`我們的合約運行在以太坊 ${chainInstance.name} 上`}</Typography>
+              <Typography variant='body1'>{`The contract running on Ethereum ${chainInstance.name}`}</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
